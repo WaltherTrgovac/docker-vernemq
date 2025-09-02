@@ -33,6 +33,8 @@ COPY --chown=10000:10000 files/vm.args /vernemq/etc/vm.args
 
 COPY --from=build --chown=10000:10000 /src/_build/default/rel/vernemq /vernemq
 
+RUN sed -i 's/\r$//' /usr/sbin/start_vernemq /usr/sbin/join_cluster
+
 RUN ln -s /vernemq/etc /etc/vernemq && \
     ln -s /vernemq/data /var/lib/vernemq && \
     ln -s /vernemq/log  /var/log/vernemq && \
